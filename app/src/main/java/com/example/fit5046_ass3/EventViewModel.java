@@ -20,6 +20,10 @@ public class EventViewModel extends AndroidViewModel{
         return eventRepository.getAllEventLive();
     }
 
+    public LiveData<List<Event>> searchEventByName(String pattern){
+        return eventRepository.searchEventByName(pattern);
+    }
+
     void insertEvent(Event... events){
         eventRepository.insertEvent(events);
     }

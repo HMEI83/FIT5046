@@ -7,6 +7,13 @@
         <entry key="app/src/main/res/layout/cell.xml" value="0.2992797588746478" />
         <entry key="app/src/main/res/layout/fragment_add_event.xml" value="0.12715298885511653" />
         <entry key="app/src/main/res/layout/fragment_events.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/fragment_my_booking.xml" value="0.13269927536231885" />
+        <entry key="app/src/main/res/layout/fragment_my_event.xml" value="0.13269927536231885" />
+        <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.1703125" />
+        <entry key="app/src/main/res/layout/my_booking_fragment.xml" value="0.13269927536231885" />
+        <entry key="app/src/main/res/layout/my_event_fragment.xml" value="0.13269927536231885" />
+        <entry key="app/src/main/res/layout/my_profile_fragment.xml" value="0.13269927536231885" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

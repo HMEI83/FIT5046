@@ -20,6 +20,10 @@ public class EventRepository {
         return allEventLive;
     }
 
+    public LiveData<List<Event>> searchEventByName(String pattern){
+        return eventDao.searchEventByName("%" + pattern + "%");
+    }
+
     void insertEvent(Event... events){
         new InsertAsyncTask(eventDao).execute(events);
     }
@@ -27,6 +31,8 @@ public class EventRepository {
     void clearEvent(Event... events){
         new ClearAsyncTask(eventDao).execute();
     }
+
+
 
     static class InsertAsyncTask extends AsyncTask<Event,Void,Void> {
         private EventDao eventDao;

@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.example.fit5046_ass3.EventsFragment"
-        android:label="fragment_events"
-        tools:layout="@layout/fragment_events" >
+        android:label="All Events "
+        tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/action_eventsFragment_to_addEventFragment"
             app:destination="@id/addEventFragment"
@@ -18,6 +18,21 @@
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.example.fit5046_ass3.AddEventFragment"
-        android:label="fragment_add_event"
+        android:label="Create Event"
         tools:layout="@layout/fragment_add_event" />
+    <fragment
+        android:id="@+id/myBookingFragment"
+        android:name="com.example.fit5046_ass3.MyBookingFragment"
+        android:label="My Booking"
+        tools:layout="@layout/my_booking_fragment" />
+    <fragment
+        android:id="@+id/myEventFragment"
+        android:name="com.example.fit5046_ass3.MyEventFragment"
+        android:label="My Event"
+        tools:layout="@layout/my_event_fragment" />
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.example.fit5046_ass3.MyProfileFragment"
+        android:label="My Profile"
+        tools:layout="@layout/my_profile_fragment" />
 </navigation>
