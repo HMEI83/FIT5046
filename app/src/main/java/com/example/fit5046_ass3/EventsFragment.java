@@ -30,6 +30,9 @@ import android.widget.SearchView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class EventsFragment extends Fragment {
@@ -38,6 +41,8 @@ public class EventsFragment extends Fragment {
     private Adapter adapter;
     private FloatingActionButton floatingActionButton;
     private LiveData<List<Event>>searchEvents;
+    private JSONArray jarray;
+    private GetEvent getEvent;
 
     public EventsFragment() {
         setHasOptionsMenu(true);
@@ -109,7 +114,6 @@ public class EventsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         eventViewModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
         recyclerView = requireActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
