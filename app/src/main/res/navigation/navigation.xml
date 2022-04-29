@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/eventsFragment">
+    app:startDestination="@id/test2">
 
     <fragment
         android:id="@+id/eventsFragment"
@@ -35,4 +35,9 @@
         android:name="com.example.fit5046_ass3.MyProfileFragment"
         android:label="My Profile"
         tools:layout="@layout/my_profile_fragment" />
+    <fragment
+        android:id="@+id/test2"
+        android:name="com.example.fit5046_ass3.Test"
+        android:label="test_fragment"
+        tools:layout="@layout/test_fragment" />
 </navigation>

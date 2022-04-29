@@ -17,4 +17,7 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/Test"
+        android:title="Test" />
 </menu>
