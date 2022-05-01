@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     List<Event> allEvent = new ArrayList<>();
-
+    //private List<EventModel> list;
     public void setAllEvent(List<Event> allEvent) {
         this.allEvent = allEvent;
     }

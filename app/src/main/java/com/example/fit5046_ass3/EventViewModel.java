@@ -1,6 +1,7 @@
 package com.example.fit5046_ass3;
 import android.app.Application;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -17,8 +18,16 @@ public class EventViewModel extends AndroidViewModel{
     }
 
     public LiveData<List<Event>> getAllEventLive() {
+
         return eventRepository.getAllEventLive();
     }
+    /*
+    public void getEventData(EventModel eventModel){
+        if(eventModel == null || eventModel.getCode()==50001){
+            Toast.makeText(this,"failure",Toast.LENGTH_SHORT).show();
+        }
+    }*/
+
 
     public LiveData<List<Event>> searchEventByName(String pattern){
         return eventRepository.searchEventByName(pattern);

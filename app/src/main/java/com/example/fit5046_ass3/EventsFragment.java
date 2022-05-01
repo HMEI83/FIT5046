@@ -44,6 +44,7 @@ public class EventsFragment extends Fragment {
     private JSONArray jarray;
     private GetEvent getEvent;
 
+
     public EventsFragment() {
         setHasOptionsMenu(true);
     }
@@ -114,6 +115,15 @@ public class EventsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        try {
+            getEvent.getEvents();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JSONArray eventJarray = getEvent.getJarray();
+
+
         eventViewModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
         recyclerView = requireActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));

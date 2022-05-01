@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -19,8 +21,9 @@ import okhttp3.Response;
 
 public class GetEvent {
 
-
+    //Event event;
     JSONArray jarray;
+    ArrayList<EventModel> eventList = new ArrayList<>();
 
     public GetEvent(){
         jarray = new JSONArray();
@@ -69,6 +72,8 @@ public class GetEvent {
                     JSONObject newsObject = new JSONObject(newsResponse);
                     jarray = newsObject.getJSONArray("events");
                     for (int i = 0; i < jarray.length(); i++) {
+                        EventModel eventModel = new EventModel();
+
                         JSONObject object = jarray.getJSONObject(i);
                         String eventUrl = object.getString("url");
                         String eventName = object.getString("name");
@@ -81,9 +86,13 @@ public class GetEvent {
                         String price = "FREE";//final String imageUrl;
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
-                        System.out.println(eventName);
+                        //System.out.println(eventName);
 
+                        eventModel.setEventName(eventName);
+                        eventModel.setEventTime(startTime);
+                        eventList.add(eventModel);
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

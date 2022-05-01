@@ -35,4 +35,5 @@
         android:name="com.example.fit5046_ass3.MyProfileFragment"
         android:label="My Profile"
         tools:layout="@layout/my_profile_fragment" />
+
 </navigation>
