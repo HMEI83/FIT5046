@@ -24,6 +24,8 @@ public class GetEvent {
     //Event event;
     JSONArray jarray;
     ArrayList<EventModel> eventList = new ArrayList<>();
+    Event event;
+    EventRepository eventRepository;
 
     public GetEvent(){
         jarray = new JSONArray();
@@ -37,7 +39,7 @@ public class GetEvent {
         return jarray;
     }
 
-    public ArrayList getEvents() throws Exception{
+    public void getEvents() throws Exception{
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -88,9 +90,10 @@ public class GetEvent {
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
                         //System.out.println(eventName);
 
-                        eventModel.setEventName(eventName);
-                        eventModel.setEventTime(startTime);
-                        eventList.add(eventModel);
+                        event.setEventName(eventName);
+                        event.setEventTime(startTime);
+                        //eventList.add(eventModel);
+                        eventRepository.insertEvent(event);
                     }
 
 
@@ -100,7 +103,7 @@ public class GetEvent {
 
             }
         });
-        return eventList;
+        //return eventList;
     }
 
 }

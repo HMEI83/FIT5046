@@ -115,10 +115,10 @@ public class EventsFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ArrayList eventsList = new ArrayList();
+        //ArrayList eventsList = new ArrayList();
         super.onActivityCreated(savedInstanceState);
         try {
-            eventsList = getEvent.getEvents();
+            getEvent.getEvents();
         } catch (Exception e) {
             e.printStackTrace();
         }
