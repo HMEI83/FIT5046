@@ -33,6 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventsFragment extends Fragment {
@@ -114,14 +115,13 @@ public class EventsFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ArrayList eventsList = new ArrayList();
         super.onActivityCreated(savedInstanceState);
         try {
-            getEvent.getEvents();
+            eventsList = getEvent.getEvents();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        JSONArray eventJarray = getEvent.getJarray();
 
 
         eventViewModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);

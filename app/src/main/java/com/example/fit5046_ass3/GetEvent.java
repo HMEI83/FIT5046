@@ -37,7 +37,7 @@ public class GetEvent {
         return jarray;
     }
 
-    public void getEvents() throws Exception{
+    public ArrayList getEvents() throws Exception{
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -100,6 +100,7 @@ public class GetEvent {
 
             }
         });
+        return eventList;
     }
 
 }
