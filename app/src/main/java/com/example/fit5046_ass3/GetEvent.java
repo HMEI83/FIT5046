@@ -1,8 +1,6 @@
 package com.example.fit5046_ass3;
 
 
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Base64;
 
 import org.json.JSONArray;
@@ -26,6 +24,7 @@ public class GetEvent {
     ArrayList<EventModel> eventList = new ArrayList<>();
     //Event event;
     EventRepository eventRepository;
+    EventDao eventDao;
 
     public GetEvent(){
         jarray = new JSONArray();
@@ -89,20 +88,13 @@ public class GetEvent {
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
                         //System.out.println(eventName);
-                        Event event = new Event(i,eventName,"",eventUrl,eventDesc,"",startTime,endTime,address,price,"","");
-//                        event.setEventName(eventName);
-//                        event.setEventTime(startTime);
-//                        event.setEventUrl(eventUrl);
-//                        event.setEventDesc(eventDesc);
-//                        event.setAddress(address);
-//                        event.setCategory(category);
-//                        event.setPrice(price);
-//                        event.setEndTime(endTime);
-//                        event.setPrice("FREE");
-//                        event.setId(i);
-//                        event.setImageArray("");
-                        //eventList.add(eventModel);
+                        Event event = new Event(i,eventName,startTime);
+
+                        event.setId(i);
+                        //event.setEventName(eventName);
+                        //event.setEventTime(startTime);
                         eventRepository.insertEvent(event);
+
                     }
 
 

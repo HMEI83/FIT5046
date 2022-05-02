@@ -6,34 +6,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class EventModel implements Serializable {
-    private String status;
-    private int code;
-    private String message;
+    //private String status;
+    //private int code;
+    //private String message;
     private List<EventBean> eventBeanList;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public List<EventBean> getEventBeanList() {
         return eventBeanList;
@@ -45,12 +21,12 @@ public class EventModel implements Serializable {
 
     public static class EventBean{
         private int id;
-        private String eventName;
-        private String eventTime;
+        private String name;
+        private String datetime_start;
+        private String datetime_end;
         private String eventUrl;
         private String eventDesc;
         //private String location;
-        private String startTime;
         private String endTime;
         private String address;
         private String price;
@@ -66,20 +42,28 @@ public class EventModel implements Serializable {
             this.id = id;
         }
 
-        public String getEventName() {
-            return eventName;
+        public String getName() {
+            return name;
         }
 
-        public void setEventName(String eventName) {
-            this.eventName = eventName;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public String getEventTime() {
-            return eventTime;
+        public String getDatetime_start() {
+            return datetime_start;
         }
 
-        public void setEventTime(String eventTime) {
-            this.eventTime = eventTime;
+        public void setDatetime_start(String datetime_start) {
+            this.datetime_start = datetime_start;
+        }
+
+        public String getDatetime_end() {
+            return datetime_end;
+        }
+
+        public void setDatetime_end(String datetime_end) {
+            this.datetime_end = datetime_end;
         }
 
         public String getEventUrl() {
@@ -96,14 +80,6 @@ public class EventModel implements Serializable {
 
         public void setEventDesc(String eventDesc) {
             this.eventDesc = eventDesc;
-        }
-
-        public String getStartTime() {
-            return startTime;
-        }
-
-        public void setStartTime(String startTime) {
-            this.startTime = startTime;
         }
 
         public String getEndTime() {

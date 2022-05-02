@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -13,11 +12,8 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     List<Event> allEvent = new ArrayList<>();
-    private List<EventModel.EventBean> eventBeanList;
+    //private List<EventModel.EventBean> eventBeanList;
 
-    public Adapter(List<EventModel.EventBean> eventBeanList, FragmentActivity requireActivity) {
-        this.eventBeanList = eventBeanList;
-    }
 
     //private List<EventModel> list;
     public void setAllEvent(List<Event> allEvent) {
@@ -34,24 +30,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        Event event = allEvent.get(position);
-//        holder.textViewNum.setText(String.valueOf(position+1));
-//        holder.textViewName.setText(event.getEventName());
-//        holder.textViewTime.setText(event.getEventTime());
+        Event event = allEvent.get(position);
+        holder.textViewNum.setText(String.valueOf(position+1));
+        holder.textViewName.setText(event.getEventName());
+        holder.textViewTime.setText(event.getEventTime());
 
-        EventModel.EventBean eventBean = eventBeanList.get(position);
-        holder.textView.setText(eventBean.getEventName());
-        holder.textView.setText(eventBean.getStartTime());
+//        EventModel.EventBean eventBean = eventBeanList.get(position);
+//        holder.textView.setText(eventBean.getName());
+//        holder.textView.setText(eventBean.getDatetime_start());
     }
 
-//    @Override
-//    public int getItemCount() {
-//        return allEvent.size();
+    @Override
+    public int getItemCount() {
+        return allEvent.size();
+    }
+
+//    public int getItemCount(){
+//        return eventBeanList.size();
 //    }
-
-    public int getItemCount(){
-        return eventBeanList.size();
-    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView,textViewNum,textViewName,textViewTime;
