@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventsFragment extends Fragment {
@@ -34,6 +35,8 @@ public class EventsFragment extends Fragment {
     private LiveData<List<Event>>searchEvents;
     //private JSONArray jarray;
     private GetEvent getEvent;
+    private ArrayList<Event> eventArrayList;
+
 
 
     public EventsFragment() {
@@ -46,6 +49,13 @@ public class EventsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_events, container, false);
+    }
+
+    public ArrayList getData(){
+        eventArrayList = getEvent.getEventList();
+
+        System.out.println(eventArrayList.size());
+        return eventArrayList;
     }
 
     @Override
@@ -131,12 +141,17 @@ public class EventsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         //ArrayList eventsList = new ArrayList();
         super.onActivityCreated(savedInstanceState);
-        GetEvent getEvent = new GetEvent();
-        try {
-            getEvent.getEvents();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //getData();
+//        getEvent = new GetEvent();
+//
+//        try {
+//            getEvent.getApiData();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        ArrayList tempData = getData();
+//        System.out.println(tempData.size());
+        //getData();
         eventViewModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
         recyclerView = requireActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
