@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,15 +28,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class EventsFragment extends Fragment {
     private EventViewModel eventViewModel;
@@ -42,8 +55,8 @@ public class EventsFragment extends Fragment {
     private Adapter adapter;
     private FloatingActionButton floatingActionButton;
     private LiveData<List<Event>>searchEvents;
-    private JSONArray jarray;
-    private GetEvent getEvent;
+    //private JSONArray jarray;
+    //private GetEvent getEvent;
 
 
     public EventsFragment() {
@@ -115,10 +128,35 @@ public class EventsFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        recyclerView = requireActivity().findViewById(R.id.recyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        try {
+            Request();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        floatingActionButton = requireActivity().findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
+            }
+        });
+    }
+
+    /*
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         //ArrayList eventsList = new ArrayList();
         super.onActivityCreated(savedInstanceState);
         try {
             getEvent.getEvents();
+            Log.e("event","+1");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,12 +187,65 @@ public class EventsFragment extends Fragment {
             }
         });
     }
+*/
 
+    public void getData(EventModel eventModel){
+        if (eventModel == null){
+            Toast.makeText(requireActivity(),"failure",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        adapter = new Adapter(eventModel.getEventBeanList(),requireActivity());
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void Request() throws UnsupportedEncodingException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        String password = "funwithevent:ckytmr5q6w35";
+        //        String password = "";
+        byte[] data = password.getBytes("UTF-8");
+        String key = android.util.Base64.encodeToString(data, Base64.URL_SAFE | Base64.NO_WRAP);
+
+        StringBuilder requestURL = new StringBuilder("https://api.eventfinda.com.au/v2/events.json?");
+        requestURL.append("fields=event:(url,name,description,sessions,point,datetime_start,datetime_end,address,images,category),session:(timezone,datetime_start)");
+        requestURL.append("&order=date&row=20&location=4");
+
+        Request request = new Request.Builder()
+                .url(requestURL.toString())
+                .method("GET", null)
+                .addHeader("Authorization", "Basic " + key)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+
+            public void onFailure(Call call, IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String newsResponse = response.body().string();
+                Gson gson = new Gson();
+                final EventModel eventModel = gson.fromJson(newsResponse,EventModel.class);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getData(eventModel);
+                    }
+                });
+
+            }
+        });
+    }
+
+/*
     @Override
     public void onResume() {
         InputMethodManager inputMethodManager = (InputMethodManager) requireActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromInputMethod(getView().getWindowToken(),0);
         super.onResume();
-    }
+    }*/
 }

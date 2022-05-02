@@ -24,7 +24,7 @@ public class GetEvent {
     //Event event;
     JSONArray jarray;
     ArrayList<EventModel> eventList = new ArrayList<>();
-    Event event;
+    //Event event;
     EventRepository eventRepository;
 
     public GetEvent(){
@@ -74,7 +74,7 @@ public class GetEvent {
                     JSONObject newsObject = new JSONObject(newsResponse);
                     jarray = newsObject.getJSONArray("events");
                     for (int i = 0; i < jarray.length(); i++) {
-                        EventModel eventModel = new EventModel();
+                        //EventModel eventModel = new EventModel();
 
                         JSONObject object = jarray.getJSONObject(i);
                         String eventUrl = object.getString("url");
@@ -89,9 +89,18 @@ public class GetEvent {
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
                         //System.out.println(eventName);
-
-                        event.setEventName(eventName);
-                        event.setEventTime(startTime);
+                        Event event = new Event(i,eventName,"",eventUrl,eventDesc,"",startTime,endTime,address,price,"","");
+//                        event.setEventName(eventName);
+//                        event.setEventTime(startTime);
+//                        event.setEventUrl(eventUrl);
+//                        event.setEventDesc(eventDesc);
+//                        event.setAddress(address);
+//                        event.setCategory(category);
+//                        event.setPrice(price);
+//                        event.setEndTime(endTime);
+//                        event.setPrice("FREE");
+//                        event.setId(i);
+//                        event.setImageArray("");
                         //eventList.add(eventModel);
                         eventRepository.insertEvent(event);
                     }

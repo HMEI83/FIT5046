@@ -47,9 +47,7 @@ public class Event {
         this.imageArray = imageArray;
     }
 
-    public Event() {
 
-    }
 
     public int getId() {
         return id;
