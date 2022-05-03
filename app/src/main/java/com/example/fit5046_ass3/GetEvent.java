@@ -84,9 +84,11 @@ public class GetEvent {
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
 
+
                         Event event = new Event(i,eventName,startTime);
                         eventList.add(event);
                         System.out.println(eventList.size());
+
 
                         Event event = new Event(i,eventName,startTime);
                         eventList.add(event);

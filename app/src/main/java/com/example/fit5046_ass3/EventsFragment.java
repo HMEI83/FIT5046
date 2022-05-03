@@ -76,8 +76,6 @@ public class EventsFragment extends Fragment {
         main.setGetEvent();
         eventList = main.getEventList();
 
-        //insertEventData();
-
         System.out.println("Finish");
 
 
@@ -135,6 +133,7 @@ public class EventsFragment extends Fragment {
             eventViewModel.insertEvent(eventList.get(i));
         }
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -160,7 +159,8 @@ public class EventsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getContext(),eventList.get(0).getEventName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),eventList.get(0).getEventName(), Toast.LENGTH_SHORT).show();
+                eventViewModel.clearEvent();
                 insertEventData();
 
 
