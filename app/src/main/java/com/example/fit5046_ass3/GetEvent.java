@@ -85,8 +85,6 @@ public class GetEvent {
                         String price = "FREE";//final String imageUrl;
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
-                        System.out.println(eventName);
-
                         Event event = new Event(i,eventName,startTime);
                         eventList.add(event);
                         System.out.println(eventList.size());
