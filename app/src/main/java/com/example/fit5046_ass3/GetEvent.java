@@ -88,6 +88,10 @@ public class GetEvent {
                         eventList.add(event);
                         System.out.println(eventList.size());
 
+                        Event event = new Event(i,eventName,startTime);
+                        eventList.add(event);
+                        System.out.println(eventList.size());
+
                     }
 
 

@@ -1,7 +1,33 @@
 package com.example.fit5046_ass3;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,18 +37,8 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +49,8 @@ public class EventsFragment extends Fragment {
     private Adapter adapter;
     private FloatingActionButton floatingActionButton;
     private LiveData<List<Event>>searchEvents;
-    //private JSONArray jarray;
-    private GetEvent getEvent;
-    private ArrayList<Event> eventArrayList;
 
-
+    private ArrayList<Event> eventList;
 
     public EventsFragment() {
         setHasOptionsMenu(true);
@@ -51,19 +64,23 @@ public class EventsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_events, container, false);
     }
 
-    public ArrayList getData(){
-        eventArrayList = getEvent.getEventList();
-
-        System.out.println(eventArrayList.size());
-        return eventArrayList;
-    }
-
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.main_menu,menu);
         SearchView searchView = (SearchView) menu.findItem(R.id.searchEvent).getActionView();
         searchView.setMaxWidth(500);
+
+
+        MainActivity main = (MainActivity) getActivity();
+        main.setGetEvent();
+        eventList = main.getEventList();
+
+        //insertEventData();
+
+        System.out.println("Finish");
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -112,46 +129,16 @@ public class EventsFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-/*
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        recyclerView = requireActivity().findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        try {
-            Request();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+
+    public void insertEventData(){
+        for(int i = 0; i < eventList.size(); i++){
+            eventViewModel.insertEvent(eventList.get(i));
         }
-
-        floatingActionButton = requireActivity().findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
-            }
-        });
-    } */
-
-
+    }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        //ArrayList eventsList = new ArrayList();
         super.onActivityCreated(savedInstanceState);
-        //getData();
-//        getEvent = new GetEvent();
-//
-//        try {
-//            getEvent.getApiData();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        ArrayList tempData = getData();
-//        System.out.println(tempData.size());
-        //getData();
+
         eventViewModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
         recyclerView = requireActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
@@ -172,64 +159,17 @@ public class EventsFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
-            }
-        });
-    }
 
-/*
-    public void getData(EventModel eventModel){
-        if (eventModel == null){
-            Toast.makeText(requireActivity(),"failure",Toast.LENGTH_SHORT).show();
-            return;
-        }
+                Toast.makeText(getContext(),eventList.get(0).getEventName(), Toast.LENGTH_SHORT).show();
+                insertEventData();
 
-        adapter = new Adapter(eventModel.getEventBeanList(),this);
-        recyclerView.setAdapter(adapter);
-    }
 
-    public void Request() throws UnsupportedEncodingException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        String password = "funwithevent:ckytmr5q6w35";
-        //        String password = "";
-        byte[] data = password.getBytes("UTF-8");
-        String key = android.util.Base64.encodeToString(data, Base64.URL_SAFE | Base64.NO_WRAP);
-
-        StringBuilder requestURL = new StringBuilder("https://api.eventfinda.com.au/v2/events.json?");
-        requestURL.append("fields=event:(url,name,description,sessions,point,datetime_start,datetime_end,address,images,category),session:(timezone,datetime_start)");
-        requestURL.append("&order=date&row=20&location=4");
-
-        Request request = new Request.Builder()
-                .url(requestURL.toString())
-                .method("GET", null)
-                .addHeader("Authorization", "Basic " + key)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-
-            public void onFailure(Call call, IOException e) {
-                call.cancel();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                String newsResponse = response.body().string();
-                Gson gson = new Gson();
-                final EventModel eventModel = gson.fromJson(newsResponse,EventModel.class);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        getData(eventModel);
-                    }
-                });
+                //NavController navController = Navigation.findNavController(view);
+                //navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
 
             }
         });
     }
-*/
 
     @Override
     public void onResume() {

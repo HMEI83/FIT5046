@@ -7,14 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventViewModel extends AndroidViewModel{
     private EventRepository eventRepository;
 
+    
     public EventViewModel(@NonNull Application application) {
         super(application);
         eventRepository = new EventRepository(application);
+
     }
 
     public LiveData<List<Event>> getAllEventLive() {
@@ -27,6 +30,8 @@ public class EventViewModel extends AndroidViewModel{
             Toast.makeText(this,"failure",Toast.LENGTH_SHORT).show();
         }
     }*/
+
+
 
 
     public LiveData<List<Event>> searchEventByName(String pattern){

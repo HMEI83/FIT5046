@@ -4,15 +4,16 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-
 import org.json.JSONArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventRepository {
+
     private LiveData<List<Event>>allEventLive;
     private EventDao eventDao;
-    private JSONArray jarray;
+
     public EventRepository(Context context) {
         EventDatabase eventDatabase = EventDatabase.getDatabase(context.getApplicationContext());
         eventDao = eventDatabase.getEventDao();
