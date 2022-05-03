@@ -14,7 +14,8 @@ public class Event {
     @ColumnInfo(name = "event_time")
     private String eventTime;
 
-    public Event(String eventName, String eventTime) {
+    public Event(int id,String eventName, String eventTime) {
+        this.id = id;
         this.eventName = eventName;
         this.eventTime = eventTime;
     }

@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-<<<<<<< Updated upstream
-=======
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.Toast;
->>>>>>> Stashed changes
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,13 +49,8 @@ public class EventsFragment extends Fragment {
     private Adapter adapter;
     private FloatingActionButton floatingActionButton;
     private LiveData<List<Event>>searchEvents;
-<<<<<<< Updated upstream
-=======
 
     private ArrayList<Event> eventList;
-
-
->>>>>>> Stashed changes
 
     public EventsFragment() {
         setHasOptionsMenu(true);
@@ -83,7 +76,7 @@ public class EventsFragment extends Fragment {
         main.setGetEvent();
         eventList = main.getEventList();
 
-        insertEventData();
+        //insertEventData();
 
         System.out.println("Finish");
 
@@ -136,47 +129,16 @@ public class EventsFragment extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-<<<<<<< Updated upstream
-=======
-/*
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        recyclerView = requireActivity().findViewById(R.id.recyclerView);
-        recyclerView.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        try {
-            Request();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        floatingActionButton = requireActivity().findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController navController = Navigation.findNavController(view);
-                navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
-            }
-        });
-    } */
 
     public void insertEventData(){
         for(int i = 0; i < eventList.size(); i++){
             eventViewModel.insertEvent(eventList.get(i));
         }
     }
->>>>>>> Stashed changes
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         eventViewModel = new ViewModelProvider(requireActivity()).get(EventViewModel.class);
         recyclerView = requireActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));

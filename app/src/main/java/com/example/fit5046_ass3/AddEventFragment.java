@@ -75,8 +75,8 @@ public class AddEventFragment extends Fragment {
             public void onClick(View view) {
                 String eventName = addEventName.getText().toString().trim();
                 String eventTime = addEventTime.getText().toString().trim();
-                Event event = new Event(eventName,eventTime);
-                eventViewModel.insertEvent(event);
+                //Event event = new Event(eventName,eventTime);
+                //eventViewModel.insertEvent(event);
                 NavController navController = Navigation.findNavController(view);
                 navController.navigateUp();
                 InputMethodManager inputMethodManager = (InputMethodManager) requireActivity()

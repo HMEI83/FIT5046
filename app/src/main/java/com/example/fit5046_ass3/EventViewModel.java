@@ -11,8 +11,8 @@ import java.util.List;
 
 public class EventViewModel extends AndroidViewModel{
     private EventRepository eventRepository;
-    private ArrayList<Event> eventList;
 
+    
     public EventViewModel(@NonNull Application application) {
         super(application);
         eventRepository = new EventRepository(application);
@@ -22,25 +22,8 @@ public class EventViewModel extends AndroidViewModel{
     public LiveData<List<Event>> getAllEventLive() {
         return eventRepository.getAllEventLive();
     }
-<<<<<<< Updated upstream
-=======
-
-    public void setEventList(){
-        //eventRepository.setEventListFromApi();
-    }
 
 
-
-
-
-    /*
-    public void getEventData(EventModel eventModel){
-        if(eventModel == null || eventModel.getCode()==50001){
-            Toast.makeText(this,"failure",Toast.LENGTH_SHORT).show();
-        }
-    }*/
-
->>>>>>> Stashed changes
 
     public LiveData<List<Event>> searchEventByName(String pattern){
         return eventRepository.searchEventByName(pattern);
