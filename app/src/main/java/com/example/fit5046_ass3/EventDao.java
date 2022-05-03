@@ -23,7 +23,7 @@ public interface EventDao {
     @Query("DELETE FROM EVENT")
     void deleteAllEvent();
 
-    @Query("SELECT * FROM EVENT ORDER BY ID DESC")
+    @Query("SELECT * FROM EVENT")
     LiveData<List<Event>>getAllEvent();
 
     @Query("SELECT * FROM EVENT WHERE event_name LIKE :pattern ORDER BY ID DESC")

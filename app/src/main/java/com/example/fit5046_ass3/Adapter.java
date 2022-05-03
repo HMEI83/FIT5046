@@ -12,7 +12,10 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     List<Event> allEvent = new ArrayList<>();
+    //private List<EventModel.EventBean> eventBeanList;
 
+
+    //private List<EventModel> list;
     public void setAllEvent(List<Event> allEvent) {
         this.allEvent = allEvent;
     }
@@ -31,12 +34,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         holder.textViewNum.setText(String.valueOf(position+1));
         holder.textViewName.setText(event.getEventName());
         holder.textViewTime.setText(event.getEventTime());
+
+//        EventModel.EventBean eventBean = eventBeanList.get(position);
+//        holder.textView.setText(eventBean.getName());
+//        holder.textView.setText(eventBean.getDatetime_start());
     }
 
     @Override
     public int getItemCount() {
         return allEvent.size();
     }
+
+//    public int getItemCount(){
+//        return eventBeanList.size();
+//    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView,textViewNum,textViewName,textViewTime;

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.15833333333333333" />
         <entry key="..\:/GitHub/FIT5046/app/src/main/res/layout/activity_main.xml" value="0.223731884057971" />
         <entry key="..\:/GitHub/FIT5046/app/src/main/res/layout/fragment_add_event.xml" value="0.223731884057971" />
         <entry key="..\:/GitHub/FIT5046/app/src/main/res/layout/fragment_events.xml" value="0.223731884057971" />
