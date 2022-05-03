@@ -19,29 +19,36 @@ import okhttp3.Response;
 
 public class GetEvent {
 
+<<<<<<< Updated upstream
 
     JSONArray jarray;
+=======
+    JSONArray jarray;
+    ArrayList<Event> eventList;
+>>>>>>> Stashed changes
 
     public GetEvent(){
         jarray = new JSONArray();
-    }
-
-    public void setJarray(JSONArray newJarray){
-        jarray = newJarray;
+        eventList = new ArrayList<Event>();
     }
 
     public JSONArray getJarray(){
         return jarray;
     }
 
-    public void getEvents() throws Exception{
+    public ArrayList<Event> getEventList(){
+        return eventList;
+    }
+
+
+    public void getApiData() throws Exception{
 
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String password = "funwithevent:ckytmr5q6w35";
 //        String password = "";
         byte[] data = password.getBytes("UTF-8");
-        String key = android.util.Base64.encodeToString(data, Base64.URL_SAFE | Base64.NO_WRAP);
+        String key = Base64.encodeToString(data, Base64.URL_SAFE | Base64.NO_WRAP);
 
         StringBuilder requestURL = new StringBuilder("https://api.eventfinda.com.au/v2/events.json?");
         requestURL.append("fields=event:(url,name,description,sessions,point,datetime_start,datetime_end,address,images,category),session:(timezone,datetime_start)");
@@ -81,7 +88,14 @@ public class GetEvent {
                         String price = "FREE";//final String imageUrl;
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
+<<<<<<< Updated upstream
                         System.out.println(eventName);
+=======
+
+                        Event event = new Event(i,eventName,startTime);
+                        eventList.add(event);
+                        System.out.println(eventList.size());
+>>>>>>> Stashed changes
 
                     }
 

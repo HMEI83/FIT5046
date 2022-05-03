@@ -5,16 +5,41 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+<<<<<<< Updated upstream
+=======
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+>>>>>>> Stashed changes
 import java.util.List;
 
 public class EventRepository {
+
     private LiveData<List<Event>>allEventLive;
     private EventDao eventDao;
+<<<<<<< Updated upstream
+=======
+
+    private GetEvent getEvent;
+    private ArrayList<Event> eventList;
+
+>>>>>>> Stashed changes
     public EventRepository(Context context) {
         EventDatabase eventDatabase = EventDatabase.getDatabase(context.getApplicationContext());
         eventDao = eventDatabase.getEventDao();
         allEventLive = eventDao.getAllEvent();
     }
+
+    public void setEventListFromApi(){
+        ArrayList<Event> eventList = getEvent.getEventList();
+
+        for(int i = 0; i < eventList.size(); i++){
+            //insertEvent(eventList.get(i));
+            System.out.println(eventList.size());
+        }
+
+    }
+
 
     public LiveData<List<Event>> getAllEventLive() {
         return allEventLive;
