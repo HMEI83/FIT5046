@@ -11,9 +11,8 @@
         android:label="All Events "
         tools:layout="@layout/fragment_events">
         <action
-            android:id="@+id/action_eventsFragment_to_addEventFragment"
-            app:destination="@id/addEventFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            android:id="@+id/action_eventsFragment_to_eventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEventFragment"
@@ -26,14 +25,12 @@
         android:label="My Booking"
         tools:layout="@layout/my_booking_fragment" />
     <fragment
-        android:id="@+id/myEventFragment"
-        android:name="com.example.fit5046_ass3.MyEventFragment"
-        android:label="My Event"
-        tools:layout="@layout/my_event_fragment" />
-    <fragment
-        android:id="@+id/myProfileFragment"
-        android:name="com.example.fit5046_ass3.MyProfileFragment"
-        android:label="My Profile"
-        tools:layout="@layout/my_profile_fragment" />
-
+        android:id="@+id/eventDetailFragment"
+        android:name="com.example.fit5046_ass3.EventDetailFragment"
+        android:label="EventDetail"
+        tools:layout="@layout/event_detail_fragment" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 </navigation>

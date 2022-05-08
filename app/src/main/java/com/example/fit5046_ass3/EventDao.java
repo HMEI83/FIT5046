@@ -28,4 +28,7 @@ public interface EventDao {
 
     @Query("SELECT * FROM EVENT WHERE event_name LIKE :pattern ORDER BY ID DESC")
     LiveData<List<Event>>searchEventByName(String pattern);
+
+    @Query("SELECT * FROM EVENT WHERE ID IS :id")
+    LiveData<List<Event>>searchEventById(int id);
 }

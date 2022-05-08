@@ -12,24 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MyEventFragment extends Fragment {
+public class EventGraphFragment extends Fragment {
 
-    private MyEventViewModel mViewModel;
+    private EventGraphViewModel mViewModel;
 
-    public static MyEventFragment newInstance() {
-        return new MyEventFragment();
+    public static EventGraphFragment newInstance() {
+        return new EventGraphFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.my_event_fragment, container, false);
+        return inflater.inflate(R.layout.event_graph_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MyEventViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(EventGraphViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -1,6 +1,8 @@
 package com.example.fit5046_ass3;
 
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 
 import org.json.JSONArray;
@@ -76,6 +78,10 @@ public class GetEvent {
                         String eventName = object.getString("name");
                         String eventDesc = object.getString("description");
                         JSONObject location = object.getJSONObject("point");
+
+                        String lat = object.getJSONObject("point").getString("lat");
+                        String lng = object.getJSONObject("point").getString("lng");
+
                         String startTime = object.getString("datetime_start");
                         String endTime = object.getString("datetime_end");
                         String address = object.getString("address");
@@ -83,19 +89,11 @@ public class GetEvent {
                         String price = "FREE";//final String imageUrl;
                         String category = object.getJSONObject("category").getString("name");
                         JSONArray imageArray = object.getJSONObject("images").getJSONArray("images").getJSONObject(0).getJSONObject("transforms").getJSONArray("transforms");
-
-
-                        Event event = new Event(i,eventName,startTime);
-                        eventList.add(event);
-                        System.out.println(eventList.size());
-
-
-                        Event event = new Event(i,eventName,startTime);
+                        Event event = new Event(eventName,eventDesc,category,startTime,endTime,address,lat,lng );
                         eventList.add(event);
                         System.out.println(eventList.size());
 
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

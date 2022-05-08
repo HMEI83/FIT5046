@@ -33,7 +33,6 @@ public class EventViewModel extends AndroidViewModel{
 
 
 
-
     public LiveData<List<Event>> searchEventByName(String pattern){
         return eventRepository.searchEventByName(pattern);
     }
