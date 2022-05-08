@@ -73,11 +73,12 @@ public class EventsFragment extends Fragment {
 
 
         MainActivity main = (MainActivity) getActivity();
-        main.setGetEvent();
         eventList = main.getEventList();
 
-        System.out.println("Finish");
+        System.out.println("Option Finish");
 
+        eventViewModel.clearEvent();
+        insertEventData();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -113,17 +114,6 @@ public class EventsFragment extends Fragment {
                 navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
                 navController.navigate(R.id.myBookingFragment);
                 return true;
-
-            case R.id.myEvent:
-                navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
-                navController.navigate(R.id.myEventFragment);
-                return true;
-
-            case R.id.editProfile:
-                navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
-                navController.navigate(R.id.myProfileFragment);
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -154,18 +144,50 @@ public class EventsFragment extends Fragment {
                 }
             }
         });
+
+        adapter.setOnItemClick(new Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, String eventName,String eventDescription, String eventCategory,
+                                    String eventStartTime, String eventEndTime, String eventAddress,
+                                    String eventLat, String eventLng) {
+                Context context = view.getContext();
+
+                Bundle bundle = new Bundle();
+
+                bundle.putInt("detailPosition",position);
+                bundle.putString("detailName", eventName);
+                bundle.putString("detailDescription", eventDescription);
+                bundle.putString("detailEventCategory",eventCategory);
+                bundle.putString("detailEventStartTime",eventStartTime);
+                bundle.putString("detailEventEndTime",eventEndTime);
+                bundle.putString("detailEventAddress",eventAddress);
+
+                bundle.putString("detailEventLat",eventLat);
+                bundle.putString("detailEventLng",eventLng);
+
+
+                 NavController controller = Navigation.findNavController(view);
+                 controller.navigate(R.id.action_eventsFragment_to_eventDetailFragment,bundle);
+
+            }
+        });
+
+
         floatingActionButton = requireActivity().findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //Toast.makeText(getContext(),eventList.get(0).getEventName(), Toast.LENGTH_SHORT).show();
+
                 eventViewModel.clearEvent();
                 insertEventData();
+                System.out.println("Button Finish");
 
 
-                //NavController navController = Navigation.findNavController(view);
-                //navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
+
+//                NavController navController = Navigation.findNavController(view);
+//                navController.navigate(R.id.action_eventsFragment_to_addEventFragment);
 
             }
         });

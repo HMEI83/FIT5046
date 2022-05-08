@@ -36,6 +36,11 @@ public class EventRepository {
         new ClearAsyncTask(eventDao).execute();
     }
 
+    public LiveData<List<Event>> searchEventById(int id) {
+
+        return eventDao.searchEventById(id);
+    }
+
 
 
     static class InsertAsyncTask extends AsyncTask<Event,Void,Void> {
