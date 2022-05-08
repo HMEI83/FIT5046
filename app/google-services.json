@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "695087355159",
+    "project_id": "fit5046-98721",
+    "storage_bucket": "fit5046-98721.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695087355159:android:54d52977335bef49275352",
+        "android_client_info": {
+          "package_name": "com.example.fit5046_ass3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695087355159-569ui36394p1bsmagja8hscbdh88hdma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9eYTRFuQHt4UzLgTyA_7hrXBiPkXmDKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695087355159-569ui36394p1bsmagja8hscbdh88hdma.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
