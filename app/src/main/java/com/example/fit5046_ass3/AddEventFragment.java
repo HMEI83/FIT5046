@@ -69,7 +69,7 @@ public class AddEventFragment extends Fragment {
 
         addEventName.addTextChangedListener(textWatcher);
         addEventTime.addTextChangedListener(textWatcher);
-
+/*
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +83,6 @@ public class AddEventFragment extends Fragment {
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromInputMethod(view.getWindowToken(), 0);
             }
-        });
+        });*/
     }
 }
