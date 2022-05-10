@@ -114,6 +114,15 @@ public class EventsFragment extends Fragment {
                 navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
                 navController.navigate(R.id.myBookingFragment);
                 return true;
+            case R.id.myWorkManager:
+                navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
+                navController.navigate(R.id.myWorkManagerFragment);
+                return true;
+            case R.id.myGraphic:
+                navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView);
+                navController.navigate(R.id.eventGraphFragment);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

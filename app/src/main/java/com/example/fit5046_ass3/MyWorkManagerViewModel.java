@@ -5,16 +5,15 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-public class EventGraphViewModel extends AndroidViewModel {
+public class MyWorkManagerViewModel extends AndroidViewModel {
     // TODO: Implement the ViewModel
 
     private EventRepository eventRepository;
 
-    public EventGraphViewModel(@NonNull Application application) {
+    public MyWorkManagerViewModel(@NonNull Application application) {
         super(application);
         eventRepository = new EventRepository(application);
     }
@@ -22,6 +21,5 @@ public class EventGraphViewModel extends AndroidViewModel {
     public LiveData<List<Event>> getAllEventLive() {
         return eventRepository.getAllEventLive();
     }
-
 
 }

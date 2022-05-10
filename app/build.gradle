@@ -80,4 +80,13 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+
+    def work_version = "2.7.1"
+
+    implementation "androidx.work:work-runtime:$work_version"
+
+    implementation 'com.google.guava:guava:29.0-android'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

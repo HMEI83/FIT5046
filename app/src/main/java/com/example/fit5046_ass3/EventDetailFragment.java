@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -36,7 +37,11 @@ import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
+import com.mapbox.maps.ViewAnnotationOptions;
+import com.mapbox.maps.plugin.Plugin;
+import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
 import com.mapbox.maps.plugin.annotation.AnnotationSourceOptions;
+import com.mapbox.maps.plugin.annotation.AnnotationType;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 import com.mapbox.maps.viewannotation.ViewAnnotationManager;
@@ -96,7 +101,6 @@ public class EventDetailFragment extends Fragment{
         String eventLat = getArguments().getString("detailEventLat");
         String eventLng = getArguments().getString("detailEventLng");
 
-
         eventDetailName.setText(eventName);
         eventDetailLocation.setText("Location: " + eventAddress);
         eventDetailStartTime.setText("Start Time: " + eventStartTime);
@@ -104,15 +108,43 @@ public class EventDetailFragment extends Fragment{
         eventDetailDesc.setText(eventDescription);
         eventDetailCategory.setText("Category: " + eventCategory);
 
-        eventDetailLat = Float.parseFloat(eventLat);
-        eventDetailLng = Float.parseFloat(eventLng);
+
+        if(eventLat.equals("null") || eventLng.equals("null"))
+        {
+            Toast.makeText(getContext(),"The EVENT can not be located on the Map",Toast.LENGTH_SHORT).show();
+            System.out.println(eventLat +  "||||||" + eventLng);
+
+            eventLat = "-37.80638866619436";
+            eventLng = "144.95939939652158";
+
+
+            eventDetailLat = Float.parseFloat(eventLat);
+            eventDetailLng = Float.parseFloat(eventLng);
+        }
+        else {
+            eventDetailLat = Float.parseFloat(eventLat);
+            eventDetailLng = Float.parseFloat(eventLng);
+        }
+
 
         eventDetailMap = (MapView) requireActivity().findViewById(R.id.eventDetailMap);
 
         final Point point = Point.fromLngLat(eventDetailLng, eventDetailLat);
 
         CameraOptions cameraPosition = new CameraOptions.Builder().zoom(13.0).center(point).build();
-        eventDetailMap.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS);
+        eventDetailMap.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+
+                PointAnnotationOptions pointAnnotationOptions=new PointAnnotationOptions().withPoint(point).withIconImage(BitmapFactory.decodeResource(getResources(),R.mipmap.red_marker));
+                AnnotationPlugin annotationPlugin = eventDetailMap.getPlugin(Plugin.MAPBOX_ANNOTATION_PLUGIN_ID);
+                PointAnnotationManager   pointAnnotationManager = (PointAnnotationManager)
+                        annotationPlugin .createAnnotationManager(AnnotationType.PointAnnotation, null);
+
+                pointAnnotationManager.create(pointAnnotationOptions);
+
+            }
+        });
         eventDetailMap.getMapboxMap().setCamera(cameraPosition);
 
         bookingBtn = getActivity().findViewById(R.id.bookingButton);

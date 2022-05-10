@@ -4,20 +4,17 @@
 
     <item
         android:id="@+id/myBooking"
-        android:title="My Booking" />
+        android:title="My Booking Event" />
     <item
-        android:id="@+id/myEvent"
-        android:title="My Event" />
+        android:id="@+id/myWorkManager"
+        android:title="Check My Work Manager" />
     <item
-        android:id="@+id/editProfile"
-        android:title="Edit profile" />
+        android:id="@+id/myGraphic"
+        android:title="Check Event Graphic" />
     <item
         android:id="@+id/searchEvent"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/Test"
-        android:title="Test" />
 </menu>

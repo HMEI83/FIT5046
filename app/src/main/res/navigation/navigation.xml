@@ -33,4 +33,14 @@
         android:id="@+id/loginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/eventGraphFragment"
+        android:name="com.example.fit5046_ass3.EventGraphFragment"
+        android:label="event_graph_fragment"
+        tools:layout="@layout/event_graph_fragment" />
+    <fragment
+        android:id="@+id/myWorkManagerFragment"
+        android:name="com.example.fit5046_ass3.MyWorkManagerFragment"
+        android:label="my_work_manager_fragment"
+        tools:layout="@layout/my_work_manager_fragment" />
 </navigation>
